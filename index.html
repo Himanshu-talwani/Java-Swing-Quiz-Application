@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Java Quiz Application ✨</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div class="question-container">
+            <h2 id="question">Loading question...</h2>
+            <div class="options">
+                <label>
+                    <input type="radio" name="option" value="a"> <span id="optionA">Loading...</span>
+                </label>
+                <label>
+                    <input type="radio" name="option" value="b"> <span id="optionB">Loading...</span>
+                </label>
+                <label>
+                    <input type="radio" name="option" value="c"> <span id="optionC">Loading...</span>
+                </label>
+                <label>
+                    <input type="radio" name="option" value="d"> <span id="optionD">Loading...</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="nextButton">Next ➡️</button>
+            <button id="skipButton">Skip ⏩</button>
+        </div>
+        
+        <div id="result" class="result" style="display: none;">
+            <h3>Your Score: <span id="score"></span></h3>
+            <button onclick="resetQuiz()">Try Again</button>
+            <button onclick="endQuiz()">Exit</button>
+        </div>
+    </div>
+
+    <script>
+const questions = [
+    "Which keyword is used to define a class in Java?",
+    "Which symbol is used to end a statement in Java?",
+    "Which can store multiple values of the same type in Java?",
+    "Which keyword is used to create an object in Java?",
+    "Java is a _____ typed language.",
+    "Which data type is used to store textual data in a variable?",
+    "Which Java structure repeats code until a condition becomes false?",
+    "How do you write a single-line comment in Java?",
+    "Which function is used to print in Java?",
+    "Java programs are first compiled into _____."
+];
+
+const options = [
+    ["class", "method", "object", "package"],
+    ["colon (:)", "comma (,)", "semicolon (;)", "dot (.)"],
+    ["ArrayList", "Object", "Array", "HashMap"],
+    ["class", "new", "this", "that"],
+    ["Dynamically", "Statically", "Weakly", "Strongly"],
+    ["char", "String", "int", "float"],
+    ["if-else", "for loop", "switch", "try-catch"],
+    ["// comment", "/* comment */", "# comment", "<!-- comment -->"],
+    ["System.out.println()", "cout<<", "printf()", "Console.WriteLine()"],
+    ["bytecode", "source code", "assembly code", "binary code"]
+];
+
+const answers = ['a', 'c', 'c', 'b', 'b', 'b', 'b', 'a', 'a', 'a'];
+
+let currentIndex = 0;
+let score = 0;
+
+// Load the question and options
+function loadQuestion() {
+    clearSelection();
+
+    if (currentIndex < questions.length) {
+        document.getElementById('question').textContent = `${currentIndex + 1}. ${questions[currentIndex]}`;
+        document.getElementById('optionA').textContent = `A) ${options[currentIndex][0]}`;
+        document.getElementById('optionB').textContent = `B) ${options[currentIndex][1]}`;
+        document.getElementById('optionC').textContent = `C) ${options[currentIndex][2]}`;
+        document.getElementById('optionD').textContent = `D) ${options[currentIndex][3]}`;
+    } else {
+        showResult();
+    }
+}
+
+// Clear previous radio button selection
+function clearSelection() {
+    const options = document.getElementsByName('option');
+    options.forEach(option => option.checked = false);
+}
+
+// Show final result
+function showResult() {
+    document.querySelector('.question-container').style.display = 'none';
+    document.querySelector('.buttons').style.display = 'none';
+    const resultBox = document.getElementById('result');
+    resultBox.style.display = 'block';
+    document.getElementById('score').textContent = `${score}/${questions.length}`;
+}
+
+// Handle "Next" click
+document.getElementById('nextButton').addEventListener('click', () => {
+    const selectedOption = document.querySelector('input[name="option"]:checked');
+
+    if (!selectedOption) {
+        alert("❗ Please select an option or click Skip!");
+        return;
+    }
+
+    const selectedAnswer = selectedOption.value;
+    if (selectedAnswer === answers[currentIndex]) {
+        score++;
+    }
+
+    currentIndex++;
+    loadQuestion();
+});
+
+// Handle "Skip" click
+document.getElementById('skipButton').addEventListener('click', () => {
+    currentIndex++;
+    loadQuestion();
+});
+
+// Restart the quiz
+function resetQuiz() {
+    currentIndex = 0;
+    score = 0;
+    document.querySelector('.question-container').style.display = 'block';
+    document.querySelector('.buttons').style.display = 'flex';
+    document.getElementById('result').style.display = 'none';
+    loadQuestion();
+}
+
+// Exit quiz
+function endQuiz() {
+    alert("Thank you for playing! 😊");
+    window.location.reload();
+}
+
+// Load the first question initially
+loadQuestion();
+    </script>
+</body>
+</html>

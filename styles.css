@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #b4d7ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+.quiz-container {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+}
+
+.options {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.options label {
+    display: block;
+    font-size: 18px;
+    margin: 12px 0;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.options input[type="radio"] {
+    margin-right: 10px;
+}
+
+.options label:hover {
+    background-color: #e6f0ff;
+    transform: translateX(5px);
+}
+
+button {
+    background-color: #64c896;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #56b682;
+    transform: scale(1.05);
+}
+
+#skipButton {
+    background-color: #faaa64;
+}
+
+#skipButton:hover {
+    background-color: #f5944d;
+}
+
+.result {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 30px;
+    color: #444;
+}
+
+#result {
+    display: none;
+    animation: fadeIn 1s ease;
+}
+
+#score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2a9d8f;
+    margin: 15px 0;
+}
